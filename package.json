@@ -1,0 +1,11 @@
+{
+  "name": "ip_check",
+  "version": "1.0.0",
+  "dependencies": {
+
+  },
+
+  "require": {
+    "guzzlehttp/guzzle": "^7.0"
+  }
+}

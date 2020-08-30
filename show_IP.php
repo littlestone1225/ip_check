@@ -13,8 +13,17 @@ $abuse_black_list = $abuse -> abuseipdb_get();
 </head>
 <body>
 <h1>IP_check</h1>
-<h2>使用者自訂黑名單</h2>
-<table style="border: solid 1px black">
+
+<h2>其他功能</h2>
+<a href="index.php">輸入黑名單</a><br><br>
+<a href="delete_IP.php">刪除黑名單</a><br><br>
+
+<h2>黑名單列表(含自訂及官方)</h2>
+
+<table style="border: solid 1px black ;display: inline-flex;">
+    <tr>
+        <td style="border: solid 1px black;">AbuseIPDB</td>
+    </tr>
     <tr>
         <td>num</td>
         <td>ip_name</td>
@@ -24,6 +33,7 @@ $abuse_black_list = $abuse -> abuseipdb_get();
     <?php
     foreach ($abuse_black_list as $item){
         ?>
+
         <tr>
             <td><?= $item['num']?></td>
             <td><?= $item['ipAddress']?></td>
@@ -32,6 +42,18 @@ $abuse_black_list = $abuse -> abuseipdb_get();
         <?php
     }
     ?>
+
+
+</table>
+<table style="border: solid 1px black;display: inline-flex;">
+    <tr>
+        <td style="border: solid 1px black;">USER</td>
+    </tr>
+    <tr>
+        <td>num</td>
+        <td>ip_name</td>
+        <td>db type</td>
+    </tr>
     <?php
     foreach ($user_black_list as $item){
         ?>
@@ -49,10 +71,6 @@ $abuse_black_list = $abuse -> abuseipdb_get();
         <?php
     }
     ?>
-
 </table>
-<br>
-<a href="index.php">輸入黑名單</a><br><br>
-<a href="show_IP.php">刪除黑名單</a><br><br>
-
 </body>
+</html>

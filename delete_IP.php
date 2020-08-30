@@ -10,6 +10,10 @@ $user_black_list = $userdb->userdb_get();
 </head>
 <body>
 <h1>IP_check</h1>
+<h2>其他功能</h2>
+<a href="index.php">輸入黑名單</a><br><br>
+<a href="show_IP.php">顯示黑名單</a><br><br>
+
 <h2>使用者自訂黑名單</h2>
 <table style="border: solid 1px black">
     <tr>
@@ -37,7 +41,6 @@ $user_black_list = $userdb->userdb_get();
     ?>
 </table>
 
-<a href="index.php">輸入黑名單</a><br><br>
-<a href="show_IP.php">顯示黑名單</a><br><br>
 
 </body>
+</html>

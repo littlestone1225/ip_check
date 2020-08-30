@@ -1,4 +1,6 @@
 <?php
+/* Report all errors except E_NOTICE */
+error_reporting(E_ALL^E_NOTICE);
 define("DB_HOST", "localhost");
 define("DB_NAME", "ip_check");
 define("DB_USER", "root");

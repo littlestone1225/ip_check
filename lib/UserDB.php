@@ -4,8 +4,8 @@ Class UserDB{
     function userdb_insert($ip,$mask){
         $db = new Dbconnect();
         $dbc=$db->connect();
-        $rs=$dbc->prepare("INSERT INTO `useripdb_blacklist`(`ip_name`,`mask`) VALUES (:ip_name,:mask)");
-        $array['ip_name'] = $ip;
+        $rs=$dbc->prepare("INSERT INTO `useripdb_blacklist`(`ipAddress`,`mask`) VALUES (:ipAddress,:mask)");
+        $array['ipAddress'] = $ip;
         $array['mask'] = $mask;
         $result =  $rs->execute($array);
         return $result;
@@ -47,18 +47,27 @@ Class UserDB{
         $subnet &= $mask; # nb: in case the supplied subnet wasn't correctly aligned
         return ($ip & $mask) == $subnet;
     }
-    function userdb_cidr_match($range){
+    function userdb_IP_match($range){
         $IPs = UserDB::userdb_get_IP();
         $ip_list = Array();
         foreach ($IPs as $ip){
             if($ip['mask']==0){
-                $result = UserDB::cidr_match($ip['ip_name'], $range);
+                $result = UserDB::cidr_match($ip['ipAddress'], $range);
                 if ($result){
-                    array_push($ip_list, $ip['ip_name']);
+                    array_push($ip_list, $ip['ipAddress']);
                 }
             }
         }
         return $ip_list;
+    }
+    function userdb_CIDR_match($ipAddress,$mask){
+        $IPs = UserDB::userdb_get();
+        foreach ($IPs as $ip){
+            if($ip['mask']==$mask && $ip['ipAddress']==$ipAddress){
+                return true;
+            }
+        }
+        return false;
     }
 }
 ?>

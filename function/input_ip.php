@@ -54,6 +54,21 @@ if($mask==0){//INPUT IP
         echo $_POST['ip_cidr']." is not in Abuse blacklist.";
     }
     echo "<br><br><br>";
+
+    $user_list = $userdb ->userdb_IP_match($_POST['ip_cidr']);
+    if($ip_check<>100){
+        if(count($user_list)==0){
+            $r = $userdb-> userdb_insert($ip,$mask);
+            echo $_POST['ip_cidr']." insert into user IP black list.";
+        }else{
+            echo "This IP already exists in the user IP list: <br>";
+            foreach ($user_list as $u){
+                echo $u."<br>";
+            }
+        }
+    }
+
+
 }else{//INPUT CIDR
     $ip_list = $abuse->abuseipdb_check_CIDR($_POST['ip_cidr']);
     echo "IP_check from AbuseIPDB:".$_POST['ip_cidr']."<br>";
@@ -64,19 +79,17 @@ if($mask==0){//INPUT IP
             echo "IP: ".$item[0].", ConfidenceScore: ".$item[1]."<br><br>";
         }
     }
-    $r = $userdb-> userdb_insert($ip,$mask);
-}
 
-$user_list = $userdb ->userdb_cidr_match($_POST['ip_cidr']);
-
-if(count($user_list)==0){
-    $r = $userdb-> userdb_insert($ip,$mask);
-}else{
-    echo "This IP already exists in the user IP list: <br>";
-    foreach ($user_list as $u){
-        echo $u."<br>";
+    $check = $userdb ->userdb_cidr_match($ip,$mask);
+    if(!$check){
+        $r = $userdb-> userdb_insert($ip,$mask);
+        echo $_POST['ip_cidr']." insert into user IP black list.";
+    }else{
+        echo "This CIDR already exists in the user IP list. <br>";
     }
 }
+
+
 
 ?>
 

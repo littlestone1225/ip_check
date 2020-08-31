@@ -9,7 +9,17 @@ IP_check====================================
 顯示黑名單
 >>列出黑名單，可以button切換顯示模式。
 
+database============================
+ip_check.sql
 
+abuseipdb_blacklist
+|| num || ipAddress || abuseConfidenceScore||
+	
+setting
+|| index || abuse_LastUpdateTime || user_LastUpdateTime || abuseipdb_TotalIP || user_TotalIP ||
+
+useripdb_blacklist
+|| num || ipAddress || mask ||
 
 安裝紀錄================================
 GuzzleHttp for API used to link web services.
